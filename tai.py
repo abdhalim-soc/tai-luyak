@@ -2,111 +2,107 @@ import os
 import time
 import random
 
+CYAN = "\033[96m"
+GREEN = "\033[92m"
+RED = "\033[91m"
+YELLOW = "\033[93m"
+RESET = "\033[0m"
+
 def clear():
     os.system("cls" if os.name == "nt" else "clear")
 
-def loading(title):
-    print(f"\n{title}\n")
+def matrix():
+    chars = "01ABCDEFXYZ#@$%"
+    for _ in range(20):
+        print(GREEN + "".join(random.choice(chars) for _ in range(60)) + RESET)
+        time.sleep(0.05)
 
-    steps = [
-        "Initializing Hacker Core...",
-        "Loading Military Database...",
-        "Connecting To Satellite...",
-        "Accessing Secret Network...",
-        "Decrypting Quantum Firewall...",
-        "Synchronizing Matrix...",
-        "Analyzing Target..."
-    ]
-
-    for step in steps:
-        print(step)
-        time.sleep(0.7)
-
-    print("\n[████████████████████] 100%")
-    time.sleep(1)
-
-def result():
-    print("\n╔════════════════════════════╗")
-    print("║      OPERATION RESULT      ║")
-    print("╠════════════════════════════╣")
-    print(f"║ Damage      : {random.randint(0,0)}%           ║")
-    print("║ Website     : Normal       ║")
-    print(f"║ Hacker Ego  : +{random.randint(1000,9999)}      ║")
-    print("║ Reality     : Unchanged    ║")
-    print("╚════════════════════════════╝")
-    input("\nPress Enter...")
+def progress():
+    for i in range(0, 101, 5):
+        bar = "█" * (i // 5)
+        print(f"\r{CYAN}[{bar:<20}] {i}%{RESET}", end="")
+        time.sleep(0.1)
+    print()
 
 def banner():
     clear()
+    print(CYAN + r"""
+███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗
+████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██╔════╝
+██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗
+██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║
+██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║
+╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+""" + RESET)
 
-    print(r"""
-██╗  ██╗ █████╗  ██████╗██╗  ██╗███████╗██████╗
-██║  ██║██╔══██╗██╔════╝██║ ██╔╝██╔════╝██╔══██╗
-███████║███████║██║     █████╔╝ █████╗  ██████╔╝
-██╔══██║██╔══██║██║     ██╔═██╗ ██╔══╝  ██╔══██╗
-██║  ██║██║  ██║╚██████╗██║  ██╗███████╗██║  ██║
-╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
+    print(YELLOW + "      NEXUS CORE v99.9\n" + RESET)
+
+def run_mode(mode):
+    clear()
+
+    target = input(f"{CYAN}TARGET ID > {RESET}")
+
+    clear()
+    print(f"{GREEN}TARGET ACQUIRED : {target}{RESET}")
+    time.sleep(1)
+
+    matrix()
+
+    print(CYAN + "\nINITIALIZING SYSTEM...\n" + RESET)
+
+    stages = [
+        "Loading Neural Matrix",
+        "Synchronizing Core",
+        "Scanning Reality",
+        "Calibrating Quantum Layer",
+        "Analyzing Universe"
+    ]
+
+    for s in stages:
+        print(GREEN + "[+]" + RESET, s)
+        time.sleep(0.8)
+
+    print()
+    progress()
+
+    score = random.randint(9000, 99999)
+
+    print(CYAN + "\n═══════════════════════════════")
+    print("       OPERATION COMPLETE")
+    print("═══════════════════════════════" + RESET)
+
+    print(f"MODE         : {mode}")
+    print(f"TARGET       : {target}")
+    print(f"POWER LEVEL  : {score}")
+    print("STATUS       : DRAMATIC")
+    print("RESULT       : NOTHING HAPPENED")
+    print("COOL FACTOR  : MAXIMUM")
+
+    input("\nPress Enter...")
+
+while True:
+    banner()
+
+    print("""
+[1] Quantum Engine
+[2] Neural Matrix
+[3] Reality Scanner
+[4] Cosmic Analyzer
+[5] Power Diagnostics
+[0] Exit
 """)
 
-    print("      OMEGA HACKER TERMINAL v99.9")
-    print("══════════════════════════════════════════════")
+    choice = input("Select > ")
 
-def menu():
-    while True:
-        banner()
-
-        print("""
-[1] Hancurkan Website
-[2] Retas Website
-[3] Ambil Data Website
-[4] Virus Website
-[5] Bajak Website
-[0] Keluar
-""")
-
-        pilih = input("Select > ")
-
-        if pilih == "1":
-            loading("MODE : HANCURKAN WEBSITE")
-            result()
-
-        elif pilih == "2":
-            loading("MODE : RETAS WEBSITE")
-            result()
-
-        elif pilih == "3":
-            loading("MODE : AMBIL DATA WEBSITE")
-            result()
-
-        elif pilih == "4":
-            loading("MODE : VIRUS WEBSITE")
-
-            print("""
-ERROR
-
-Virus forgot its password.
-Operation cancelled.
-""")
-
-            input("\nPress Enter...")
-
-        elif pilih == "5":
-            loading("MODE : BAJAK WEBSITE")
-
-            print("""
-SUCCESS
-
-Website ownership:
-Still not yours.
-""")
-
-            input("\nPress Enter...")
-
-        elif pilih == "0":
-            print("\nGoodbye Hacker 😹")
-            break
-
-        else:
-            input("Menu tidak valid!")
-
-menu()
+    if choice == "1":
+        run_mode("Quantum Engine")
+    elif choice == "2":
+        run_mode("Neural Matrix")
+    elif choice == "3":
+        run_mode("Reality Scanner")
+    elif choice == "4":
+        run_mode("Cosmic Analyzer")
+    elif choice == "5":
+        run_mode("Power Diagnostics")
+    elif choice == "0":
+        break
